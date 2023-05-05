@@ -1,11 +1,12 @@
 class Player extends GameObject {
 
-    constructor(x, y, width, heigth,) {
-        super(x, y, width, heigth)
+    constructor(x, y, width, heigth, color = 'rgba(244, 247, 118, 0.5)', imageUrl) {
+        super(x, y, width, heigth, color, imageUrl)
         this.speed = 10;
         this.controller = {};
         this.projectiles = [];
         this.attackCoolDown = 10
+       
 
     }
 
@@ -73,8 +74,10 @@ class Player extends GameObject {
 
     baseAttack() {
         if(this.attackCoolDown <= 0){
-            let projectile = new Projectiles(this.x + (this.width / 2), this.y, 5, 10);
-            this.projectiles.push(projectile);
+            let projectile = new Projectiles(this.x , this.y, 5, 10);//(this.width / 2), this.y, 5, 10);
+            let projectile2 = new Projectiles(this.x + this.width -5, this.y, 5, 10);//(this.width / 2), this.y, 5, 10);
+
+            this.projectiles.push(projectile,projectile2);
             this.attackCoolDown = 10;
         }
     }

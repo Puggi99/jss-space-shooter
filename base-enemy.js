@@ -1,7 +1,7 @@
 class BaseEnemy extends GameObject{
-    constructor(x, y, width, height){
-        super(x, y, width, height)
-        this.speed = 10;
+    constructor(x, y, width, height, color = 'red', imageUrl){
+        super(x, y, width, height, color, imageUrl)
+        this.speed = 3;
         this.healthPoints = 10;
     }
 
