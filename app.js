@@ -23,8 +23,10 @@ function animator() {
     animate = requestAnimationFrame(animator);
 
 
-    player.draw(ctx)
-    player.controls(canvasWidth, canvasHeight);
+    if (player) {
+        player.draw(ctx)
+        player.controls(canvasWidth, canvasHeight);
+    }
 
     enemySpawnCoolDown--
     if (enemySpawnCoolDown <= 0) {
@@ -38,14 +40,15 @@ function animator() {
         enemy.move(ctx)
     })
 
-    checkCollision()
-    allEnemies = allEnemies.filter(enemy => enemy.healthPoints > 0)
+    if (player) {
+        checkCollision()
+    }
 }
 
 
 function enemySpawn() {
     const randomX = Math.random() * (canvasWidth - 50);
-    let enemy = new BaseEnemy(randomX, -60,90, 70, "crimson", './assets/Senza titolo.png')
+    let enemy = new BaseEnemy(randomX, -60, 90, 70, "crimson", './assets/Senza titolo.png')
     allEnemies.push(enemy)
 }
 
@@ -57,11 +60,21 @@ function checkCollision() {
         const pA = playerAssets[i];
         for (let j = 0; j < allEnemies.length; j++) {
             const enemy = allEnemies[j];
-            if (enemy.x < (pA.x + pA.width) && (enemy.x + enemy.width) > (pA.x && enemy.y) < (pA.y + pA.height) && (enemy.y + enemy.height) > pA.y) {
-                enemy.healthPoints--
-                console.log("enemy", enemy)
+            // if (enemy.x < (pA.x + pA.width) && (enemy.x + enemy.width) > (pA.x && enemy.y) < (pA.y + pA.height) && (enemy.y + enemy.height) > pA.y) {
+            //     enemy.healthPoints--
+            //     console.log("enemy", enemy)
+            // }
+            if (pA.isColliding(enemy)) {
+                pA.collision()
+                enemy.collision()
             }
+
         }
+    }
+    allEnemies = allEnemies.filter(enemy => enemy.isAlive)
+    player.projectiles = player.projectiles.filter(projectile => projectile.isAlive);
+    if (!player.isAlive) {
+        player = null
     }
 }
 

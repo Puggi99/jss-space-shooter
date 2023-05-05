@@ -1,6 +1,7 @@
 class GameObject {
 
     constructor(x, y, width, height, color = "black", imageUrl) {
+        this.isAlive = true;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -27,4 +28,14 @@ class GameObject {
         }
     }
 
+    isColliding(other){
+        const isCollidingX = other.x < (this.x + this.width) && (other.x + other.width) > this.x
+        const isCollidingY = other.y < (this.y + this.height) && (other.y + other.height) > this.y
+
+        if (isCollidingX && isCollidingY){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

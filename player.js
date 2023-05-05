@@ -5,10 +5,19 @@ class Player extends GameObject {
         this.speed = 10;
         this.controller = {};
         this.projectiles = [];
-        this.attackCoolDown = 10
+        this.attackCoolDown = 10;
+        this.healthPoints = 18;
        
 
     }
+
+    collision(){
+        this.healthPoints--
+        if(this.healthPoints <= 0){
+            this.isAlive = false
+        }
+    }
+
 
     draw(ctx) {
         super.draw(ctx);
@@ -74,8 +83,8 @@ class Player extends GameObject {
 
     baseAttack() {
         if(this.attackCoolDown <= 0){
-            let projectile = new Projectiles(this.x , this.y, 5, 10);//(this.width / 2), this.y, 5, 10);
-            let projectile2 = new Projectiles(this.x + this.width -5, this.y, 5, 10);//(this.width / 2), this.y, 5, 10);
+            let projectile = new Projectiles(this.x , this.y, 25, 20, '', './greta.png');//(this.width / 2), this.y, 5, 10);
+            let projectile2 = new Projectiles(this.x + this.width -5, this.y, 25, 20, '', './greta.png');//(this.width / 2), this.y, 5, 10);
 
             this.projectiles.push(projectile,projectile2);
             this.attackCoolDown = 10;
@@ -83,5 +92,5 @@ class Player extends GameObject {
     }
 
 
-}
+} 
 
