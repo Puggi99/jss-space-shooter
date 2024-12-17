@@ -9,11 +9,28 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <!-- Aggiungi l'elemento audio per la musica di sottofondo -->
+    <audio id="backgroundMusic" loop autoplay>
+        <source src="./assets/El Jarabe Tapatio-The Mexican Hat Dance.mp3" type="audio/mp3">
+        Il tuo browser non supporta l'elemento audio.
+    </audio>
+
     <canvas id="canvas"></canvas>
+
+    <script src="./game-object.js"></script>
+    <script src="./projectiles.js"></script>
+    <script src="./base-enemy.js"></script>
+    <script src="./player.js"></script>
+    <script src="./app.js"></script>
+
+    <script>
+        // Ottieni il tag audio dal DOM
+        var audio = document.getElementById("backgroundMusic");
+
+        // Fa partire la musica al caricamento della pagina
+        window.addEventListener("load", function() {
+            audio.play(); // Avvia la musica automaticamente quando la pagina è completamente caricata
+        });
+    </script>
 </body>
-<script src="./game-object.js"></script>
-<script src="./projectiles.js"></script>
-<script src="./base-enemy.js"></script>
-<script src="./player.js"></script>
-<script src="./app.js"></script>
 </html>
