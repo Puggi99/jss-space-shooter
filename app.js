@@ -31,7 +31,7 @@ function animator() {
     enemySpawnCoolDown--
     if (enemySpawnCoolDown <= 0) {
         enemySpawn()
-        enemySpawnCoolDown = 25;
+        enemySpawnCoolDown = 10;
     }
 
 
